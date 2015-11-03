@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_main" tools:context=".MainActivity">
+
+    <TextView android:text="@string/alarm_status_label"
+        android:textSize="20pt"
+        android:id="@+id/alarm_status_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <TextView android:text="@string/armed_label"
+        android:textSize="16pt"
+        android:id="@+id/armed_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/alarm_status_label" />
+    <TextView android:text="@string/error"
+        android:textSize="16pt"
+        android:id="@+id/txt_armed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txt_alarm"
+        android:layout_centerHorizontal="true" />
+
+    <TextView android:text="@string/alarm_label"
+        android:textSize="16pt"
+        android:id="@+id/alarm_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/armed_label" />
+    <TextView android:text="@string/error"
+        android:textSize="16pt"
+        android:id="@+id/txt_alarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/armed_label"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/btn_arm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/arm"
+        android:layout_below="@+id/alarm_label"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="31dp" />
+
+    <Button
+        android:id="@+id/btn_disarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/disarm"
+        android:layout_alignBottom="@+id/btn_arm"
+        android:layout_toRightOf="@+id/btn_arm"
+        android:layout_toEndOf="@+id/btn_arm" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/refresh"
+        android:id="@+id/btn_refesh"
+        android:layout_alignTop="@+id/btn_disarm"
+        android:layout_toRightOf="@+id/btn_disarm"
+        android:layout_toEndOf="@+id/btn_disarm" />
+</RelativeLayout>
