@@ -37,7 +37,11 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onPause() {
         SharedPreferences.Editor edit = preferences.edit();
 
-        edit.putString("ip_address", et_ipAddress.getText().toString());
+        String ip_address = et_ipAddress.getText().toString();
+        ip_address.replaceFirst("^(http://|https://)","");
+        ip_address.replaceAll("/$", "");
+
+        edit.putString("ip_address", ip_address);
         edit.putBoolean("auto_refresh", sw_autoRefresh.isChecked());
 
         edit.commit();

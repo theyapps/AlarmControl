@@ -94,7 +94,7 @@ public class AlarmService extends IntentService {
         Log.d("AlarmService", "FetchStatus");
 
         HttpClient client = new DefaultHttpClient();
-        HttpGet get = new HttpGet(hostname);
+        HttpGet get = new HttpGet("http://" + hostname);
         HttpResponse response = null;
         HttpEntity entity = null;
         InputStream is = null;
@@ -156,9 +156,8 @@ public class AlarmService extends IntentService {
     }
 
     private void handleActionArm(String hostname) {
-        // TODO: Handle action
         HttpClient client = new DefaultHttpClient();
-        HttpPost post = new HttpPost(hostname + "ARM");
+        HttpPost post = new HttpPost("http://" + hostname + "/ARM");
         HttpResponse response;
         try {
             response = client.execute(post);
@@ -166,19 +165,19 @@ public class AlarmService extends IntentService {
             e.printStackTrace();
         }
 
-        Log.d("AlarmService", "Arm");
+        Log.d("AlarmService", "POST http://" + hostname + "/ARM");
     }
 
     private void handleActionDisarm(String hostname) {
         // TODO: Handle action
         HttpClient client = new DefaultHttpClient();
-        HttpPost post = new HttpPost(hostname + "DISARM");
+        HttpPost post = new HttpPost("http://" + hostname + "/DISARM");
         HttpResponse response;
         try {
             response = client.execute(post);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Log.d("AlarmService", "Disarm");
+        Log.d("AlarmService", "POST http://" + hostname + "/DISARM");
     }
 }

@@ -120,6 +120,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onPause() {
+        unregisterReceiver(alarmResponseReceiver);
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        IntentFilter filter = new IntentFilter("edu.utdallas.rcb120030.intent.action.FETCH_COMPLETE");
+        filter.addCategory(Intent.CATEGORY_DEFAULT);
+        alarmResponseReceiver = new AlarmResponseReceiver();
+        registerReceiver(alarmResponseReceiver, filter);
+
+        super.onResume();
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
