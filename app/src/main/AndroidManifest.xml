@@ -30,7 +30,7 @@
             android:exported="false" >
         </service>
         <service
-            android:name=".service.AlarmService"
+            android:name=".service.AlarmAPIService"
             android:exported="false" >
         </service>
 

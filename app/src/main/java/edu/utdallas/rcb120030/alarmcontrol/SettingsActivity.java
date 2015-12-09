@@ -25,7 +25,6 @@ public class SettingsActivity extends AppCompatActivity {
 
         preferences = getSharedPreferences("edu.utdallas.rcb120030.alarmcontrol", MODE_PRIVATE);
 
-
         et_ipAddress = (EditText) findViewById(R.id.ipAddress);
         sw_autoRefresh = (Switch) findViewById(R.id.autoRefresh);
 

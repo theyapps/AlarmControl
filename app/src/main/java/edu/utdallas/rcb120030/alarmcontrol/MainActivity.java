@@ -14,16 +14,12 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Handler;
-import java.util.logging.LogRecord;
 
-import edu.utdallas.rcb120030.alarmcontrol.service.AlarmService;
+import edu.utdallas.rcb120030.alarmcontrol.service.AlarmAPIService;
 
 public class MainActivity extends AppCompatActivity {
     private static String hostname = "http://192.168.0.7/";
@@ -108,15 +104,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void Arm() {
-        AlarmService.startActionArm(getApplicationContext(), hostname);
+        AlarmAPIService.startActionArm(getApplicationContext(), hostname);
     }
 
     private void disArm() {
-        AlarmService.startActionDisarm(getApplicationContext(), hostname);
+        AlarmAPIService.startActionDisarm(getApplicationContext(), hostname);
     }
 
     private void displayStatus(){
-        AlarmService.startActionFetchStatus(getApplicationContext(), hostname);
+        AlarmAPIService.startActionFetchStatus(getApplicationContext(), hostname);
     }
 
     @Override

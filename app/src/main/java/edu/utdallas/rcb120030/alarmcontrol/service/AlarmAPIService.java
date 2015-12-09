@@ -19,8 +19,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import edu.utdallas.rcb120030.alarmcontrol.MainActivity;
-
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
  * a service on a separate handler thread.
@@ -28,46 +26,40 @@ import edu.utdallas.rcb120030.alarmcontrol.MainActivity;
  * TODO: Customize class - update intent actions, extra parameters and static
  * helper methods.
  */
-public class AlarmService extends IntentService {
-    // TODO: Rename actions, choose action names that describe tasks that this
+public class AlarmAPIService extends IntentService {
     // IntentService can perform, e.g. ACTION_FETCH_NEW_ITEMS
     private static final String ACTION_FETCH_STATUS = "edu.utdallas.rcb120030.alarmcontrol.action.FETCH_STATUS";
     private static final String ACTION_ARM = "edu.utdallas.rcb120030.alarmcontrol.action.ARM";
     private static final String ACTION_DISARM = "edu.utdallas.rcb120030.alarmcontrol.action.DISARM";
 
-    public static final int FETCH_STATUS = 0;
-    public static final int FETCH_ARM = 1;
-    public static final int FETCH_DISARM = 2;
-
-    // TODO: Rename parameters
     private static final String EXTRA_HOSTNAME = "edu.utdallas.rcb120030.alarmcontrol.extra.HOSTNAME";
     private static final String EXTRA_ARMED_OUT = "edu.utdallas.rcb120030.alarmcontrol.extra.ARMED_OUT";
     private static final String EXTRA_ALARM_OUT = "edu.utdallas.rcb120030.alarmcontrol.extra.ALARM_OUT";
 
 
     public static void startActionFetchStatus(Context context, String hostname) {
-        Intent intent = new Intent(context, AlarmService.class);
+        Intent intent = new Intent(context, AlarmAPIService.class);
         intent.setAction(ACTION_FETCH_STATUS);
         intent.putExtra(EXTRA_HOSTNAME, hostname);
         context.startService(intent);
     }
 
     public static void startActionArm(Context context, String hostname) {
-        Intent intent = new Intent(context, AlarmService.class);
+        Intent intent = new Intent(context, AlarmAPIService.class);
         intent.setAction(ACTION_ARM);
         intent.putExtra(EXTRA_HOSTNAME, hostname);
         context.startService(intent);
     }
 
     public static void startActionDisarm(Context context, String hostname) {
-        Intent intent = new Intent(context, AlarmService.class);
+        Intent intent = new Intent(context, AlarmAPIService.class);
         intent.setAction(ACTION_DISARM);
         intent.putExtra(EXTRA_HOSTNAME, hostname);
         context.startService(intent);
     }
 
-    public AlarmService() {
-        super("AlarmService");
+    public AlarmAPIService() {
+        super("AlarmAPIService");
     }
 
     @Override
@@ -90,8 +82,7 @@ public class AlarmService extends IntentService {
     }
 
     private void handleActionFetchStatus(String hostname) {
-        // TODO: Handle action
-        Log.d("AlarmService", "FetchStatus");
+        Log.d("AlarmAPIService", "FetchStatus");
 
         HttpClient client = new DefaultHttpClient();
         HttpGet get = new HttpGet("http://" + hostname);
@@ -125,7 +116,7 @@ public class AlarmService extends IntentService {
                     }
                     is.close();
                     json = sb.toString();
-                    Log.d("AlarmService", json);
+                    Log.d("AlarmAPIService", json);
                 } catch (Exception e) {
                     Log.e("Buffer Error", "Error converting result " + e.toString());
                 }
@@ -165,11 +156,10 @@ public class AlarmService extends IntentService {
             e.printStackTrace();
         }
 
-        Log.d("AlarmService", "POST http://" + hostname + "/ARM");
+        Log.d("AlarmAPIService", "POST http://" + hostname + "/ARM");
     }
 
     private void handleActionDisarm(String hostname) {
-        // TODO: Handle action
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost("http://" + hostname + "/DISARM");
         HttpResponse response;
@@ -178,6 +168,6 @@ public class AlarmService extends IntentService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        Log.d("AlarmService", "POST http://" + hostname + "/DISARM");
+        Log.d("AlarmAPIService", "POST http://" + hostname + "/DISARM");
     }
 }
